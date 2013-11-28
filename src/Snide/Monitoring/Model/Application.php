@@ -28,7 +28,6 @@ class Application
      * @var string
      */
     protected $url;
-
     /**
      * List of tests
      *
@@ -36,6 +35,32 @@ class Application
      */
     protected $tests;
 
+    /**
+     * Down exception
+     *
+     * @var \Exception
+     */
+    protected $exception;
+
+    /**
+     * Getter exception
+     *
+     * @return \Exception
+     */
+    public function getException()
+    {
+        return $this->exception;
+    }
+
+    /**
+     * Setter exception
+     *
+     * @param \Exception $exception Down exception
+     */
+    public function setException(\Exception $exception)
+    {
+        $this->exception = $exception;
+    }
     /**
      * Getter ID
      *
@@ -113,6 +138,9 @@ class Application
      */
     public function getTests()
     {
+        if(!is_array($this->tests)) {
+            $this->tests = array();
+        }
         return $this->tests;
     }
 
@@ -126,5 +154,25 @@ class Application
         foreach($tests as $test) {
             $this->addTest($test);
         }
+    }
+
+    /**
+     * Application is working if all tests are OK & no down exception is set
+     *
+     * @return boolean
+     */
+    public function isWorking()
+    {
+        if(null != $this->exception) {
+            return false;
+        }
+        foreach($this->getTests() as $test) {
+            if($test->hasFailed()) {
+                $this->exception = new \Exception('Tests failed');
+                return false;
+            }
+        }
+
+        return true;
     }
 }

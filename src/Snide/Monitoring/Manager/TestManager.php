@@ -47,6 +47,19 @@ class TestManager
         $this->tests[] = $test;
     }
 
+
+    /**
+     * Add a list of tests to the list
+     *
+     * @param array $tests List of tests
+     */
+    public function addTests(array $tests)
+    {
+        foreach($tests as $test) {
+            $this->addTest($test);
+        }
+    }
+
     /**
      * Getter tests
      *
@@ -67,6 +80,7 @@ class TestManager
      */
     public function setTests(array $tests)
     {
+        $this->tests = array();
         foreach($tests as $test) {
             $this->addTest($test);
         }
@@ -99,6 +113,23 @@ class TestManager
         $criticTests = array();
         foreach($this->getTests() as $test) {
             if($test->isCritic() && $test->hasFailed()) {
+                $criticTests[] = $test;
+            }
+        }
+
+        return $criticTests;
+    }
+
+    /**
+     * Get not critical tests (Get failed tests without tests define as critical)
+     *
+     * @return array List of tests
+     */
+    public function getNotCriticalFailedTests()
+    {
+        $criticTests = array();
+        foreach($this->getTests() as $test) {
+            if(!$test->isCritic() && $test->hasFailed()) {
                 $criticTests[] = $test;
             }
         }
@@ -141,6 +172,31 @@ class TestManager
 
 
         return $failedTests;
+    }
+
+    /**
+     * Get tests as json format
+     */
+    public function getTestsAsJson()
+    {
+        $data = array();
+        foreach($this->getTests() as $test) {
+            $row = array(
+                'identifier' => (string) $test->getIdentifier(),
+                'critic'     => (bool) $test->isCritic(),
+                'category'   => (string) $test->getCategory()
+            );
+
+            if($test->hasFailed()) {
+                $row['exception'] = array(
+                    'message' => $test->getException()->getMessage(),
+                    'code'    => $test->getException()->getCode()
+                );
+            }
+            $data[] = $row;
+        }
+
+        return json_encode(array('tests' => $data));
     }
 
     /**

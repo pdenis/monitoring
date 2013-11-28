@@ -2,6 +2,7 @@
 
 namespace Snide\Monitoring\Manager;
 
+use Snide\Monitoring\Loader\TestLoaderInterface;
 use Snide\Monitoring\Model\Application;
 use Snide\Monitoring\Repository\ApplicationRepositoryInterface;
 
@@ -24,17 +25,25 @@ class ApplicationManager implements ApplicationManagerInterface
      * @var string
      */
     protected $class;
+    /**
+     * Test loader (Loader for application tests)
+     *
+     * @var TestLoaderInterface
+     */
+    protected $testLoader;
 
     /**
      * Constructor
      *
      * @param ApplicationRepositoryInterface $repository Application repository
      * @param $class
+     * @param \Snide\Monitoring\Loader\TestLoaderInterface $testLoader Application test loader
      */
-    public function __construct(ApplicationRepositoryInterface $repository, $class)
+    public function __construct(ApplicationRepositoryInterface $repository, $class, TestLoaderInterface $testLoader)
     {
         $this->repository = $repository;
         $this->class = $class;
+        $this->testLoader = $testLoader;
     }
 
     /**
@@ -65,7 +74,11 @@ class ApplicationManager implements ApplicationManagerInterface
      */
     public function find($id)
     {
-        return $this->repository->find($id);
+        $application = $this->repository->find($id);
+        // Load tests
+        $this->testLoader->loadByApplication($application);
+
+        return $application;
     }
 
     /**
@@ -75,7 +88,14 @@ class ApplicationManager implements ApplicationManagerInterface
      */
     public function findAll()
     {
-        return $this->repository->findAll();
+        $applications = array();
+        foreach($this->repository->findAll() as $application) {
+            // Load tests
+            $this->testLoader->loadByApplication($application);
+            $applications[] = $application;
+        }
+
+        return $applications;
     }
 
     /**
@@ -98,5 +118,25 @@ class ApplicationManager implements ApplicationManagerInterface
         $class = $this->class;
 
         return new $class;
+    }
+
+    /**
+     * Getter testLoader
+     *
+     * @return TestLoaderInterface
+     */
+    public function getTestLoader()
+    {
+        return $this->testLoader;
+    }
+
+    /**
+     * Setter testLoader
+     *
+     * @param TestLoaderInterface $testLoader Application tests loader
+     */
+    public function setTestLoader(TestLoaderInterface $testLoader)
+    {
+        $this->testLoader = $testLoader;
     }
 }

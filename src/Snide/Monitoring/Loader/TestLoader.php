@@ -1,0 +1,32 @@
+<?php
+
+namespace Snide\Monitoring\Loader;
+
+use Guzzle\Http\Client;
+use Snide\Monitoring\Model\Application;
+use Snide\Monitoring\Test\Generic;
+
+/**
+ * Class TestLoader
+ *
+ * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ */
+class TestLoader implements TestLoaderInterface
+{
+    public function loadByApplication(Application $application)
+    {
+        $data = array();
+        try {
+            $client = new Client($application->getUrl());
+            $data = json_decode($client->get()->send()->getBody(true), true);
+        }catch(\Exception $e) {
+            $application->setException($e);
+        }
+
+        if(isset($data['tests']) && is_array($data['tests'])) {
+            foreach($data['tests'] as $test) {
+                $application->addTest(new Generic($test));
+            }
+        }
+    }
+}
