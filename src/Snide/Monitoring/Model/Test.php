@@ -62,6 +62,9 @@ abstract class Test
      */
     public function getCategory()
     {
+        if(null == $this->category) {
+            return 'unknown';
+        }
         return $this->category;
     }
 

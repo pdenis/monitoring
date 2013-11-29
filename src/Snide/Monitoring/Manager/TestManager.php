@@ -28,6 +28,13 @@ class TestManager
     protected $tests;
 
     /**
+     * Filtered Category
+     *
+     * @var array
+     */
+    protected $filteredCategory;
+
+    /**
      * Constructor
      *
      * @param TestExecutorInterface $executor Test executor
@@ -70,6 +77,16 @@ class TestManager
         if(!is_array($this->tests)) {
             $this->tests = array();
         }
+        if(null != $this->getFilteredCategory()) {
+            $tests = array();
+            // Filter tests
+            foreach($this->tests as $test) {
+                if($test->getCategory() == $this->getFilteredCategory()) {
+                    $tests[] = $test;
+                }
+            }
+            return $tests;
+        }
         return $this->tests;
     }
 
@@ -84,6 +101,36 @@ class TestManager
         foreach($tests as $test) {
             $this->addTest($test);
         }
+    }
+
+    /**
+     * Getter filteredCategory
+     *
+     * @return array
+     */
+    public function getFilteredCategory()
+    {
+        return $this->filteredCategory;
+    }
+
+    /**
+     * Setter filteredCategory
+     *
+     * @param $filteredCategory A test category used to filter tests
+     */
+    public function setFilteredCategory($filteredCategory)
+    {
+        $this->filteredCategory = $filteredCategory;
+    }
+
+    public function getCategories()
+    {
+        $categories = array();
+        foreach($this->getTests() as $test) {
+            $categories[$test->getCategory()] = ucFirst($test->getCategory());
+        }
+
+        return $categories;
     }
 
     /**
