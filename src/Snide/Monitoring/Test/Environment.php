@@ -9,7 +9,7 @@ use Snide\Monitoring\Model\Test;
 /**
  * Class Environment
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class Environment extends Test
 {

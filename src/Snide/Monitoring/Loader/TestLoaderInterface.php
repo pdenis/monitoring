@@ -7,7 +7,7 @@ use Snide\Monitoring\Model\Application;
 /**
  * Interface TestLoaderInterface
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 interface TestLoaderInterface
 {

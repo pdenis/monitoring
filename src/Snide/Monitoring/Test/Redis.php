@@ -11,7 +11,7 @@ use Snide\Monitoring\Model\Test;
  *
  * Test based on phpredis extension
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class Redis extends Test
 {

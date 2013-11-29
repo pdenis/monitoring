@@ -9,7 +9,7 @@ use Snide\Monitoring\Repository\ApplicationRepositoryInterface;
 /**
  * Class ApplicationManager
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class ApplicationManager implements ApplicationManagerInterface
 {

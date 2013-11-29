@@ -9,7 +9,7 @@ use Snide\Monitoring\Test\Generic;
 /**
  * Class TestLoader
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class TestLoader implements TestLoaderInterface
 {

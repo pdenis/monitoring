@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Model;
 /**
  * Class Test
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 abstract class Test
 {

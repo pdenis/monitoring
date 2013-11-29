@@ -9,7 +9,7 @@ use Snide\Monitoring\Executor\TestExecutorInterface;
 /**
  * Class TestManager
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class TestManager
 {
@@ -34,6 +34,12 @@ class TestManager
      */
     protected $filteredCategory;
 
+    /**
+     * List of tests using filteredCategory
+     *
+     * @var array
+     */
+    protected $filterdTests;
     /**
      * Constructor
      *
@@ -77,15 +83,9 @@ class TestManager
         if(!is_array($this->tests)) {
             $this->tests = array();
         }
+
         if(null != $this->getFilteredCategory()) {
-            $tests = array();
-            // Filter tests
-            foreach($this->tests as $test) {
-                if($test->getCategory() == $this->getFilteredCategory()) {
-                    $tests[] = $test;
-                }
-            }
-            return $tests;
+            return $this->getFilteredTests();
         }
         return $this->tests;
     }
@@ -121,6 +121,18 @@ class TestManager
     public function setFilteredCategory($filteredCategory)
     {
         $this->filteredCategory = $filteredCategory;
+        $this->filterdTests = array();
+        // Filter tests
+        foreach($this->tests as $test) {
+            if($test->getCategory() == $this->getFilteredCategory()) {
+                $this->filteredTests[] = $test;
+            }
+        }
+    }
+
+    protected function getFilteredTests()
+    {
+        return $this->filterdTests;
     }
 
     public function getCategories()
