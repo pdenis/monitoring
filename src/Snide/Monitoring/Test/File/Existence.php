@@ -5,11 +5,11 @@ namespace Snide\Monitoring\Test\File;
 use Snide\Monitoring\Model\Test;
 
 /**
- * Class ExistenceTest
+ * Class Existence
  *
  * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
-class ExistenceTest extends Test
+class Existence extends Test
 {
     /**
      * File or folder path

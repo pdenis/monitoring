@@ -85,6 +85,7 @@ class TestManager
         }
 
         if(null != $this->getFilteredCategory()) {
+
             return $this->getFilteredTests();
         }
         return $this->tests;
@@ -123,7 +124,7 @@ class TestManager
         $this->filteredCategory = $filteredCategory;
         $this->filterdTests = array();
         // Filter tests
-        foreach($this->tests as $test) {
+        foreach($this->getTests() as $test) {
             if($test->getCategory() == $this->getFilteredCategory()) {
                 $this->filteredTests[] = $test;
             }

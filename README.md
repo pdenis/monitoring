@@ -33,5 +33,6 @@ Some tests class are defined :
 
 ### Create your own
 
-You can create your specifics test by extends Snide\Monitoring\Model\Test class & implements execute methods.
+You can create your specifics test by extends Snide\Monitoring\Model\Test class & implements execute method.
 Then, use TestManager to add & execute tests.
+

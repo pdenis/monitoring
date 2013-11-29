@@ -5,11 +5,11 @@ namespace Snide\Monitoring\Test\File;
 use Snide\Monitoring\Model\Test;
 
 /**
- * Class PermissionTest
+ * Class Permission
  *
  * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
-class PermissionTest extends Test
+class Permission extends Test
 {
 
     /**
