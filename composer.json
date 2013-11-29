@@ -1,7 +1,7 @@
 {
     "name":         "snide/monitoring",
     "type":         "library",
-    "description":  "Itkg monitoring helper library",
+    "description":  "Monitoring helper library",
     "keywords":     ["library", "monitoring", "snide"],
     "homepage":     "http://github.com/pdenis/monitoring",
     "license":      "MIT",
