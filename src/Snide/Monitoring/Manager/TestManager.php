@@ -58,7 +58,6 @@ class TestManager
         $this->tests[] = $test;
     }
 
-
     /**
      * Add a list of tests to the list
      *
@@ -129,11 +128,21 @@ class TestManager
         }
     }
 
+    /**
+     * Getter filteredTests
+     *
+     * @return array
+     */
     protected function getFilteredTests()
     {
         return $this->filterdTests;
     }
 
+    /**
+     * Getter categories
+     *
+     * @return array
+     */
     public function getCategories()
     {
         $categories = array();
@@ -227,7 +236,6 @@ class TestManager
                 $failedTests[] = $test;
             }
         }
-
 
         return $failedTests;
     }
