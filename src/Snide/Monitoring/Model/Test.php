@@ -15,28 +15,24 @@ abstract class Test
      * @var string
      */
     protected $identifier;
-
     /**
      * Test category
      *
      * @var string
      */
     protected $category;
-
     /**
      * Possible exception
      *
      * @var \Exception
      */
     protected $exception;
-
     /**
      * This test is critic?
      *
      * @var boolean
      */
     protected $critic;
-
     /**
      * This test can be executed?
      *

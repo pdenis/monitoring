@@ -19,21 +19,18 @@ class TestManager
      * @var TestExecutorInterface
      */
     protected $executor;
-
     /**
      * List of tests
      *
      * @var array
      */
     protected $tests;
-
     /**
      * Filtered Category
      *
      * @var array
      */
     protected $filteredCategory;
-
     /**
      * List of tests using filteredCategory
      *

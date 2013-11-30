@@ -13,6 +13,11 @@ use Snide\Monitoring\Test\Generic;
  */
 class TestLoader implements TestLoaderInterface
 {
+    /**
+     * Load Test for an application using Guzzle\Http\Client and JSON format
+     *
+     * @param Application $application
+     */
     public function loadByApplication(Application $application)
     {
         $data = array();

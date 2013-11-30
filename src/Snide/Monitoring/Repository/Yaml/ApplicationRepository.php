@@ -20,7 +20,6 @@ class ApplicationRepository implements ApplicationRepositoryInterface
      * @var string
      */
     protected $filename;
-
     /**
      * Application class
      *
@@ -134,9 +133,9 @@ class ApplicationRepository implements ApplicationRepositoryInterface
         foreach ($this->getRows() as $row) {
             if ($row['id'] == $application->getId()) {
                 $row = array(
-                    'id' => $application->getId(),
+                    'id'   => $application->getId(),
                     'name' => $application->getName(),
-                    'url' => $application->getUrl()
+                    'url'  => $application->getUrl()
                 );
             }
             $rows[] = $row;

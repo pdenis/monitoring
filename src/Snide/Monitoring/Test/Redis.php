@@ -22,7 +22,6 @@ class Redis extends Test
      * @var string
      */
     protected $host;
-
     /**
      * Server port
      *
@@ -30,6 +29,13 @@ class Redis extends Test
      */
     protected $port;
 
+    /**
+     * Constructor
+     *
+     * @param string $identifier
+     * @param $host Redis host
+     * @param $port Redis port
+     */
     public function __construct($identifier, $host, $port)
     {
         $this->host = $host;

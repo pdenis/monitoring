@@ -11,5 +11,10 @@ use Snide\Monitoring\Model\Application;
  */
 interface TestLoaderInterface
 {
+    /**
+     * Load Test for an application
+     *
+     * @param Application $application
+     */
     public function loadByApplication(Application $application);
 }
