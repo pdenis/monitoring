@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Test;
 /**
  * Class EnvironmentTest
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class EnvironmentTest extends \PHPUnit_Framework_TestCase
 {

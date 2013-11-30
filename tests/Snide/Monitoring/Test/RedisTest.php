@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Test;
 /**
  * Class RedisTest
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class RedisTest extends \PHPUnit_Framework_TestCase
 {

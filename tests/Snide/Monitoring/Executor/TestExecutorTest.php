@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Executor;
 /**
  * Class TestExecutorTest
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class TestExecutorTest  extends \PHPUnit_Framework_TestCase
 {

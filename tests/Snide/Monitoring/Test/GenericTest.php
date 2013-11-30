@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Test;
 /**
  * Class GenericTest
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class GenericTest extends \PHPUnit_Framework_TestCase
 {

@@ -5,7 +5,7 @@ namespace Snide\Monitoring\Test\File;
 /**
  * Class Existence
  *
- * @author Pascal DENIS <pascal.denis@businessdecision.com>
+ * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
 class Existence extends \PHPUnit_Framework_TestCase
 {
