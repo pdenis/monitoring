@@ -23,7 +23,7 @@ class TestExecutor implements TestExecutorInterface
         try {
             // Execute test
             $test->execute();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Set exception
             $test->setException($e);
         }

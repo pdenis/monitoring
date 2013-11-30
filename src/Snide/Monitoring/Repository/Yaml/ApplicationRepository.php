@@ -52,7 +52,7 @@ class ApplicationRepository implements ApplicationRepositoryInterface
     {
         $applications = array();
 
-        foreach($this->getRows() as $row) {
+        foreach ($this->getRows() as $row) {
             $application = $this->createNew();
             $application->setId($row['id']);
             $application->setName($row['name']);
@@ -72,8 +72,8 @@ class ApplicationRepository implements ApplicationRepositoryInterface
      */
     public function find($id)
     {
-        foreach($this->findAll() as $application) {
-            if($id == $application->getId()) {
+        foreach ($this->findAll() as $application) {
+            if ($id == $application->getId()) {
                 return $application;
             }
         }
@@ -93,9 +93,9 @@ class ApplicationRepository implements ApplicationRepositoryInterface
         $id = sizeof($rows) + 1;
 
         $rows[] = array(
-            'id'   => $id,
+            'id' => $id,
             'name' => $application->getName(),
-            'url'  => $application->getUrl()
+            'url' => $application->getUrl()
         );
 
         file_put_contents($this->filename, Yaml::dump($rows));
@@ -111,8 +111,8 @@ class ApplicationRepository implements ApplicationRepositoryInterface
     {
         $rows = array();
 
-        foreach($this->getRows() as $row) {
-            if($row['id'] == $application->getId()) {
+        foreach ($this->getRows() as $row) {
+            if ($row['id'] == $application->getId()) {
                 continue;
             }
             $rows[] = $row;
@@ -131,12 +131,12 @@ class ApplicationRepository implements ApplicationRepositoryInterface
     {
         $rows = array();
 
-        foreach($this->getRows() as $row) {
-            if($row['id'] == $application->getId()) {
+        foreach ($this->getRows() as $row) {
+            if ($row['id'] == $application->getId()) {
                 $row = array(
-                    'id'   => $application->getId(),
+                    'id' => $application->getId(),
                     'name' => $application->getName(),
-                    'url'  => $application->getUrl()
+                    'url' => $application->getUrl()
                 );
             }
             $rows[] = $row;
@@ -151,7 +151,7 @@ class ApplicationRepository implements ApplicationRepositoryInterface
      */
     private function getRows()
     {
-        return Yaml::parse($this->filename) ?: array();
+        return Yaml::parse($this->filename) ? : array();
     }
 
     /**

@@ -21,22 +21,22 @@ class Generic extends Test
      */
     public function __construct($data = array())
     {
-        if(isset($data['category'])) {
+        if (isset($data['category'])) {
             $this->category = $data['category'];
         }
 
-        if(isset($data['exception']['code']) && isset($data['exception']['message'])) {
+        if (isset($data['exception']['code']) && isset($data['exception']['message'])) {
             $this->exception = new \Exception(
                 $data['exception']['message'],
                 $data['exception']['code']
             );
         }
 
-        if(isset($data['identifier'])) {
+        if (isset($data['identifier'])) {
             $this->identifier = $data['identifier'];
         }
 
-        if(isset($data['critic'])) {
+        if (isset($data['critic'])) {
             $this->critic = $data['critic'];
         }
 

@@ -41,8 +41,8 @@ class Environment extends Test
      */
     public function execute()
     {
-        if(!isset($_ENV[$this->key])) {
-            throw new \Exception('Environment var '.$this->key.' does not exist');
+        if (!isset($_ENV[$this->key])) {
+            throw new \Exception('Environment var ' . $this->key . ' does not exist');
         }
     }
 

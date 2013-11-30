@@ -44,7 +44,7 @@ interface ApplicationManagerInterface
     /**
      * Find an application
      *
-     * @param $id App ID
+     * @param string $id App ID
      * @return Application
      */
     public function find($id);

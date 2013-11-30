@@ -48,9 +48,9 @@ class Permission extends Test
      */
     public function execute()
     {
-        if(file_exists($this->path)) {
+        if (file_exists($this->path)) {
             $filePermissions = substr(sprintf('%o', fileperms($this->path)), -3);;
-            if(!in_array($filePermissions, $this->permissions)) {
+            if (!in_array($filePermissions, $this->permissions)) {
                 throw new \Exception(
                     sprintf(
                         'Path : %s does not have required permissions. Permissions : %s',
@@ -59,7 +59,7 @@ class Permission extends Test
                     )
                 );
             }
-        }else {
+        } else {
             throw new \Exception(sprintf('Path : %s does not exist', $this->path));
         }
 

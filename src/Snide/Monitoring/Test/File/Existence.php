@@ -38,7 +38,7 @@ class Existence extends Test
      */
     public function execute()
     {
-        if(!file_exists($this->path)) {
+        if (!file_exists($this->path)) {
             throw new \Exception(sprintf('Path : %s does not exist', $this->path));
         }
     }

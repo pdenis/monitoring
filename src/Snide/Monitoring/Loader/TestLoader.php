@@ -19,12 +19,12 @@ class TestLoader implements TestLoaderInterface
         try {
             $client = new Client($application->getUrl());
             $data = json_decode($client->get()->send()->getBody(true), true);
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $application->setException($e);
         }
 
-        if(isset($data['tests']) && is_array($data['tests'])) {
-            foreach($data['tests'] as $test) {
+        if (isset($data['tests']) && is_array($data['tests'])) {
+            foreach ($data['tests'] as $test) {
                 $application->addTest(new Generic($test));
             }
         }

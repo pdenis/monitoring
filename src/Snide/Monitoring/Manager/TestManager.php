@@ -3,8 +3,8 @@
 
 namespace Snide\Monitoring\Manager;
 
-use Snide\Monitoring\Model\Test;
 use Snide\Monitoring\Executor\TestExecutorInterface;
+use Snide\Monitoring\Model\Test;
 
 /**
  * Class TestManager
@@ -40,6 +40,7 @@ class TestManager
      * @var array
      */
     protected $filterdTests;
+
     /**
      * Constructor
      *
@@ -68,7 +69,7 @@ class TestManager
      */
     public function addTests(array $tests)
     {
-        foreach($tests as $test) {
+        foreach ($tests as $test) {
             $this->addTest($test);
         }
     }
@@ -80,11 +81,11 @@ class TestManager
      */
     public function getTests()
     {
-        if(!is_array($this->tests)) {
+        if (!is_array($this->tests)) {
             $this->tests = array();
         }
 
-        if(null != $this->getFilteredCategory()) {
+        if (null != $this->getFilteredCategory()) {
 
             return $this->getFilteredTests();
         }
@@ -99,7 +100,7 @@ class TestManager
     public function setTests(array $tests)
     {
         $this->tests = array();
-        foreach($tests as $test) {
+        foreach ($tests as $test) {
             $this->addTest($test);
         }
     }
@@ -124,8 +125,8 @@ class TestManager
         $this->filteredCategory = $filteredCategory;
         $this->filterdTests = array();
         // Filter tests
-        foreach($this->getTests() as $test) {
-            if($test->getCategory() == $this->getFilteredCategory()) {
+        foreach ($this->getTests() as $test) {
+            if ($test->getCategory() == $this->getFilteredCategory()) {
                 $this->filteredTests[] = $test;
             }
         }
@@ -139,7 +140,7 @@ class TestManager
     public function getCategories()
     {
         $categories = array();
-        foreach($this->getTests() as $test) {
+        foreach ($this->getTests() as $test) {
             $categories[$test->getCategory()] = ucFirst($test->getCategory());
         }
 
@@ -154,8 +155,8 @@ class TestManager
     public function getSuccessTests()
     {
         $successTests = array();
-        foreach($this->getTests() as $test) {
-            if(!$test->hasFailed()) {
+        foreach ($this->getTests() as $test) {
+            if (!$test->hasFailed()) {
                 $successTests[] = $test;
             }
         }
@@ -171,8 +172,8 @@ class TestManager
     public function getCriticalFailedTests()
     {
         $criticTests = array();
-        foreach($this->getTests() as $test) {
-            if($test->isCritic() && $test->hasFailed()) {
+        foreach ($this->getTests() as $test) {
+            if ($test->isCritic() && $test->hasFailed()) {
                 $criticTests[] = $test;
             }
         }
@@ -188,8 +189,8 @@ class TestManager
     public function getNotCriticalFailedTests()
     {
         $criticTests = array();
-        foreach($this->getTests() as $test) {
-            if(!$test->isCritic() && $test->hasFailed()) {
+        foreach ($this->getTests() as $test) {
+            if (!$test->isCritic() && $test->hasFailed()) {
                 $criticTests[] = $test;
             }
         }
@@ -205,8 +206,8 @@ class TestManager
     public function getCriticalTests()
     {
         $criticTests = array();
-        foreach($this->getTests() as $test) {
-            if($test->isCritic()) {
+        foreach ($this->getTests() as $test) {
+            if ($test->isCritic()) {
                 $criticTests[] = $test;
             }
         }
@@ -223,9 +224,9 @@ class TestManager
     {
         $failedTests = array();
 
-        foreach($this->getTests() as $test) {
+        foreach ($this->getTests() as $test) {
 
-            if($test->hasFailed()) {
+            if ($test->hasFailed()) {
                 $failedTests[] = $test;
             }
         }
@@ -240,17 +241,17 @@ class TestManager
     public function getTestsAsJson()
     {
         $data = array();
-        foreach($this->getTests() as $test) {
+        foreach ($this->getTests() as $test) {
             $row = array(
-                'identifier' => (string) $test->getIdentifier(),
-                'critic'     => (bool) $test->isCritic(),
-                'category'   => (string) $test->getCategory()
+                'identifier' => (string)$test->getIdentifier(),
+                'critic' => (bool)$test->isCritic(),
+                'category' => (string)$test->getCategory()
             );
 
-            if($test->hasFailed()) {
+            if ($test->hasFailed()) {
                 $row['exception'] = array(
                     'message' => $test->getException()->getMessage(),
-                    'code'    => $test->getException()->getCode()
+                    'code' => $test->getException()->getCode()
                 );
             }
             $data[] = $row;
@@ -267,8 +268,8 @@ class TestManager
     public function getExecutableTests()
     {
         $executableTests = array();
-        foreach($this->getTests() as $test) {
-            if($test->isExecutable()) {
+        foreach ($this->getTests() as $test) {
+            if ($test->isExecutable()) {
                 $executableTests[] = $test;
             }
         }
@@ -282,7 +283,7 @@ class TestManager
     public function executeTests()
     {
         // Run all of executable tests
-        foreach($this->getExecutableTests() as $test) {
+        foreach ($this->getExecutableTests() as $test) {
             $this->executor->execute($test);
         }
     }

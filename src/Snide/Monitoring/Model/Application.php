@@ -61,6 +61,7 @@ class Application
     {
         $this->exception = $exception;
     }
+
     /**
      * Getter ID
      *
@@ -138,7 +139,7 @@ class Application
      */
     public function getTests()
     {
-        if(!is_array($this->tests)) {
+        if (!is_array($this->tests)) {
             $this->tests = array();
         }
         return $this->tests;
@@ -151,7 +152,7 @@ class Application
      */
     public function setTests(array $tests = array())
     {
-        foreach($tests as $test) {
+        foreach ($tests as $test) {
             $this->addTest($test);
         }
     }
@@ -163,11 +164,11 @@ class Application
      */
     public function isWorking()
     {
-        if(null != $this->exception) {
+        if (null != $this->exception) {
             return false;
         }
-        foreach($this->getTests() as $test) {
-            if($test->hasFailed()) {
+        foreach ($this->getTests() as $test) {
+            if ($test->hasFailed()) {
                 $this->exception = new \Exception('Tests failed');
                 return false;
             }

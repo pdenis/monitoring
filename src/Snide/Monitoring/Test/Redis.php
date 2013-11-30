@@ -64,7 +64,7 @@ class Redis extends Test
         // Remove key after the test
         $client->delete($key);
 
-        if(!$ret) {
+        if (!$ret) {
             throw new \Exception('Read only system (check memory_used)', 1);
         }
     }

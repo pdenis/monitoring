@@ -69,7 +69,7 @@ class ApplicationManager implements ApplicationManagerInterface
     /**
      * Find an application
      *
-     * @param $id App ID
+     * @param string $id App ID
      * @return Application
      */
     public function find($id)
@@ -89,7 +89,7 @@ class ApplicationManager implements ApplicationManagerInterface
     public function findAll()
     {
         $applications = array();
-        foreach($this->repository->findAll() as $application) {
+        foreach ($this->repository->findAll() as $application) {
             // Load tests
             $this->testLoader->loadByApplication($application);
             $applications[] = $application;
