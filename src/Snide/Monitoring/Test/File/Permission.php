@@ -48,7 +48,7 @@ class Permission extends Test
     public function execute()
     {
         if (file_exists($this->path)) {
-            $filePermissions = substr(sprintf('%o', fileperms($this->path)), -3);;
+            $filePermissions = substr(sprintf('%o', fileperms($this->path)), -3);
             if (!in_array($filePermissions, $this->permissions)) {
                 throw new \Exception(
                     sprintf(

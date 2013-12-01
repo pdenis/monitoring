@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Snide\Monitoring\Executor;
 
 use Snide\Monitoring\Model\Test;
-
 
 /**
  * Interface TestExecutorInterface

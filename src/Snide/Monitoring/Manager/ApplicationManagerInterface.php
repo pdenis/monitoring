@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Snide\Monitoring\Manager;
 
 use Snide\Monitoring\Model\Application;
-
 
 /**
  * Interface ApplicationManagerInterface

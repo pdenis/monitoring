@@ -5,7 +5,6 @@ namespace Snide\Monitoring\Test;
 
 use Snide\Monitoring\Model\Test;
 
-
 /**
  * Class Generic
  *

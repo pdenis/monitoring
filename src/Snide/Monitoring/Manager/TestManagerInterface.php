@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Snide\Monitoring\Manager;
 
-use Snide\Monitoring\Executor\TestExecutorInterface;
 use Snide\Monitoring\Model\Test;
 
 /**

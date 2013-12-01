@@ -5,7 +5,6 @@ namespace Snide\Monitoring\Repository;
 
 use Snide\Monitoring\Model\Application;
 
-
 /**
  * Class ApplicationRepositoryInterface
  *

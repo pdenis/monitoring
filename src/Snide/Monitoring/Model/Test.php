@@ -170,5 +170,5 @@ abstract class Test
      * @throws \Exception
      * @return void
      */
-    public abstract function execute();
+    abstract public function execute();
 }

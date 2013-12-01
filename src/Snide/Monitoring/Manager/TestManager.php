@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Snide\Monitoring\Manager;
 
 use Snide\Monitoring\Executor\TestExecutorInterface;
@@ -138,7 +137,7 @@ class TestManager
      */
     public function getFilteredTests()
     {
-        if(!is_array($this->filteredTests)) {
+        if (!is_array($this->filteredTests)) {
             $this->filteredTests = array();
         }
         return $this->filteredTests;
