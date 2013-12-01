@@ -1,11 +1,4 @@
 tools:
-    php_code_coverage:
-        enabled: true
-        config_path: ~
-        test_command: phpunit
-        filter:
-            excluded_paths:
-                - 'tests/*'
     php_mess_detector:
         enabled: true
         extensions:
