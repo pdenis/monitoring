@@ -11,6 +11,6 @@ before_script:
   - composer install --prefer-source --no-interaction
   - mkdir -p php/extensions && cd php/extensions && git clone https://github.com/nicolasff/phpredis && cd phpredis && phpize && echo "Configuring phpredis..." && ./configure > /dev/null && echo "Building phpredis..." && make -j4 > /dev/null && echo "Installing phpredis..." && sudo make install > /dev/null && cd ../../..
   - echo 'extension=redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - pwd
+
 script:
   - phpunit -c phpunit.xml.dist --coverage-text

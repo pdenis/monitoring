@@ -68,13 +68,6 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::getRows
-     */
-    private function testGetRows()
-    {
-    }
-
-    /**
      * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::createNew
      */
     public function testCreateNew()
