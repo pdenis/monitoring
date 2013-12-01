@@ -167,6 +167,7 @@ class Application
         if (null != $this->exception) {
             return false;
         }
+
         foreach ($this->getTests() as $test) {
             if ($test->hasFailed()) {
                 $this->exception = new \Exception('Tests failed');
@@ -176,4 +177,5 @@ class Application
 
         return true;
     }
+
 }

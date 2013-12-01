@@ -111,4 +111,5 @@ interface TestManagerInterface
      * Execute tests (Only executable tests)
      */
     public function executeTests();
+
 }

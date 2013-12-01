@@ -53,4 +53,5 @@ interface ApplicationManagerInterface
      * @return array
      */
     public function findAll();
+
 }

@@ -103,4 +103,5 @@ class Permission extends Test
     {
         $this->permissions = $permissions;
     }
+
 }

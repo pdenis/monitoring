@@ -17,4 +17,5 @@ interface TestExecutorInterface
      * @param Test $test Test to execute
      */
     public function execute(Test $test);
+
 }
