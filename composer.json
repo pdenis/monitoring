@@ -16,6 +16,7 @@
     },
     "require": {
         "guzzle/guzzle": "v3.7.4",
+        "symfony/filesystem": "v2.3.7",
         "php": ">=5.3.3"
     },
     "autoload": {

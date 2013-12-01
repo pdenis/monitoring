@@ -24,6 +24,14 @@ class RedisTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Snide\Monitoring\Test\Redis::__construct
+     */
+    public function test__construct()
+    {
+        $this->assertEquals('Redis test', $this->object->getIdentifier());
+    }
+
+    /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
@@ -33,9 +41,24 @@ class RedisTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers Snide\Monitoring\Test\File\Redis::execute
+     * @covers Snide\Monitoring\Test\Redis::execute
      */
     public function testExecute()
     {
+        $this->assertTrue($this->object->isExecutable());
+        try {
+            $this->object->execute();
+        }catch(\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        // no existing file
+        $this->object = new Redis('Redis test', '127.0.0.1', '611379');
+        try {
+            $this->object->execute();
+            $this->fail('No exception thrown for unexisting port');
+        }catch(\Exception $e) {
+
+        }
     }
 }

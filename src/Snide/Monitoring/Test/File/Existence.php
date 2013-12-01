@@ -56,7 +56,7 @@ class Existence extends Test
     /**
      * Setter path
      *
-     * @param $path File or folder path
+     * @param string $path File or folder path
      */
     public function setPath($path)
     {

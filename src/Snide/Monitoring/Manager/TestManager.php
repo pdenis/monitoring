@@ -36,7 +36,7 @@ class TestManager
      *
      * @var array
      */
-    protected $filterdTests;
+    protected $filteredTests;
 
     /**
      * Constructor
@@ -81,10 +81,10 @@ class TestManager
             $this->tests = array();
         }
 
-        if (null != $this->getFilteredCategory()) {
-
+        if (null !== $this->getFilteredCategory()) {
             return $this->getFilteredTests();
         }
+
         return $this->tests;
     }
 
@@ -118,12 +118,15 @@ class TestManager
      */
     public function setFilteredCategory($filteredCategory)
     {
+        $tests = $this->getTests();
+
         $this->filteredCategory = $filteredCategory;
-        $this->filterdTests = array();
+        $this->filteredTests = array();
         // Filter tests
-        foreach ($this->getTests() as $test) {
+        foreach ($tests as $test) {
             if ($test->getCategory() == $this->getFilteredCategory()) {
                 $this->filteredTests[] = $test;
+
             }
         }
     }
@@ -133,9 +136,12 @@ class TestManager
      *
      * @return array
      */
-    protected function getFilteredTests()
+    public function getFilteredTests()
     {
-        return $this->filterdTests;
+        if(!is_array($this->filteredTests)) {
+            $this->filteredTests = array();
+        }
+        return $this->filteredTests;
     }
 
     /**
@@ -291,5 +297,15 @@ class TestManager
         foreach ($this->getExecutableTests() as $test) {
             $this->executor->execute($test);
         }
+    }
+
+    /**
+     * Getter executor
+     *
+     * @return TestExecutorInterface
+     */
+    public function getExecutor()
+    {
+        return $this->executor;
     }
 }

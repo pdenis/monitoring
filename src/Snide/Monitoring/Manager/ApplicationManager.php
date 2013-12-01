@@ -59,7 +59,7 @@ class ApplicationManager implements ApplicationManagerInterface
     /**
      * Delete an application
      *
-     * @param Application $application
+     * @param \Snide\Monitoring\Model\Application $application
      */
     public function delete(Application $application)
     {
@@ -101,7 +101,7 @@ class ApplicationManager implements ApplicationManagerInterface
     /**
      * Update an application
      *
-     * @param Application $application
+     * @param \Snide\Monitoring\Model\Application $application
      */
     public function update(Application $application)
     {
@@ -123,7 +123,7 @@ class ApplicationManager implements ApplicationManagerInterface
     /**
      * Getter testLoader
      *
-     * @return TestLoaderInterface
+     * @return \Snide\Monitoring\Loader\TestLoaderInterface
      */
     public function getTestLoader()
     {
@@ -131,12 +131,12 @@ class ApplicationManager implements ApplicationManagerInterface
     }
 
     /**
-     * Setter testLoader
+     * Getter repository
      *
-     * @param TestLoaderInterface $testLoader Application tests loader
+     * @return ApplicationRepositoryInterface
      */
-    public function setTestLoader(TestLoaderInterface $testLoader)
+    public function getRepository()
     {
-        $this->testLoader = $testLoader;
+        return $this->repository;
     }
 }

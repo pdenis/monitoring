@@ -1,7 +1,8 @@
 <?php
 
 namespace Snide\Monitoring\Model;
-use Snide\Monitoring\Test\Generic;
+
+use Snide\Monitoring\Test\Environment;
 
 /**
  * Class TestTest
@@ -11,7 +12,7 @@ use Snide\Monitoring\Test\Generic;
 class TestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Generic
+     * @var Environment
      */
     protected $object;
 
@@ -21,8 +22,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
-        $this->object = new Generic();
+        $this->object = new Environment('AN IDENTIFIER', 'KEY');
     }
 
     /**
@@ -33,52 +33,81 @@ class TestTest extends \PHPUnit_Framework_TestCase
     {
     }
 
+    /**
+     * @covers Snide\Monitoring\Model\Test::__construct
+     */
+    public function test__construct()
+    {
+        $this->assertEquals('AN IDENTIFIER', $this->object->getIdentifier());
+        $this->assertTrue($this->object->isExecutable());
+    }
 
     /**
-     * @covers Snide\Monitoring\Model\Application::getException
-     * @covers Snide\Monitoring\Model\Application::setException
+     * @covers Snide\Monitoring\Model\Test::getException
+     * @covers Snide\Monitoring\Model\Test::setException
      */
     public function testGetSetException()
     {
+        $this->assertNull($this->object->getException());
+        $exception = new \Exception('An exception');
+        $this->object->setException($exception);
+        $this->assertEquals($exception, $this->object->getException());
     }
 
     /**
-     * @covers Snide\Monitoring\Model\Application::getCategory
-     * @covers Snide\Monitoring\Model\Application::setCategory
+     * @covers Snide\Monitoring\Model\Test::getCategory
+     * @covers Snide\Monitoring\Model\Test::setCategory
      */
-    public function getCategory()
+    public function testGetSetCategory()
     {
+        $this->assertEquals('unknown', $this->object->getCategory());
+        $category = 'another one';
+        $this->object->setCategory($category);
+        $this->assertEquals($category, $this->object->getCategory());
     }
 
     /**
-     * @covers Snide\Monitoring\Model\Application::hasFailed
+     * @covers Snide\Monitoring\Model\Test::hasFailed
      */
     public function testHasFailed()
     {
+        $this->assertFalse($this->object->hasFailed());
+        $this->object->setException(new \Exception('An exception'));
+        $this->assertTrue($this->object->hasFailed());
     }
 
 
     /**
-     * @covers Snide\Monitoring\Model\Application::getIdentifier
-     * @covers Snide\Monitoring\Model\Application::setIdentifier
+     * @covers Snide\Monitoring\Model\Test::getIdentifier
+     * @covers Snide\Monitoring\Model\Test::setIdentifier
      */
     public function testGetSetIdentifier()
     {
+        $identifier = 'ANOTHER_IDENTIFIER';
+        $this->object->setIdentifier($identifier);
+        $this->assertEquals($identifier, $this->object->getIdentifier());
     }
 
     /**
-     * @covers Snide\Monitoring\Model\Application::isExecutable
-     * @covers Snide\Monitoring\Model\Application::setExecutable
+     * @covers Snide\Monitoring\Model\Test::isExecutable
+     * @covers Snide\Monitoring\Model\Test::setExecutable
      */
     public function testGetSetExecutable()
     {
+        $this->assertTrue($this->object->isExecutable());
+        $this->object->setExecutable(false);
+        $this->assertFalse($this->object->isExecutable());
     }
 
     /**
-     * @covers Snide\Monitoring\Model\Application::isCritic
-     * @covers Snide\Monitoring\Model\Application::setCritic
+     * @covers Snide\Monitoring\Model\Test::isCritic
+     * @covers Snide\Monitoring\Model\Test::setCritic
      */
     public function testGetSetCritic()
     {
+        $this->assertFalse($this->object->isCritic());
+        $critic = true;
+        $this->object->setCritic($critic);
+        $this->assertTrue($critic);
     }
 }

@@ -31,28 +31,53 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
     }
 
+    /**
+     * @covers Snide\Monitoring\Test\Environment::__construct
+     */
+    public function test__construct()
+    {
+        $this->assertEquals('Environment test', $this->object->getIdentifier());
+        $this->assertEquals('TYPE_ENV', $this->object->getKey());
+    }
 
     /**
-     * @covers Snide\Monitoring\Test\File\Environment::execute
+     * @covers Snide\Monitoring\Test\Environment::execute
      */
     public function testExecute()
     {
+        $this->assertTrue($this->object->isExecutable());
+        $env = "dev";
+        if(isset($_ENV["TYPE_ENV"])) {
+            $env = $_ENV["TYPE_ENV"];
+            unset($_ENV["TYPE_ENV"]);
+        }
+
+        try {
+            $this->object->execute();
+            $this->fail('No exception thrown');
+        }catch(\Exception $e) {
+
+        }
+
+        $_ENV["TYPE_ENV"] = $env;
+        try {
+            $this->object->execute();
+
+        }catch(\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+
     }
 
     /**
-     * @covers Snide\Monitoring\Test\File\Environment::getKey
-     * @covers Snide\Monitoring\Test\File\Environment::setKey
+     * @covers Snide\Monitoring\Test\Environment::getKey
+     * @covers Snide\Monitoring\Test\Environment::setKey
      */
     public function testGetSetKey()
     {
-    }
-
-    /**
-     * @covers Snide\Monitoring\Test\File\Existence::getPermissions
-     * @covers Snide\Monitoring\Test\File\Existence::setPermissions
-     */
-    public function testGetSetPermissions()
-    {
+        $this->object->setKey('NEW');
+        $this->assertEquals('NEW', $this->object->getKey());
     }
 
 }

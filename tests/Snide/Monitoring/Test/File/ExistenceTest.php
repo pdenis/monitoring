@@ -3,11 +3,11 @@
 namespace Snide\Monitoring\Test\File;
 
 /**
- * Class Existence
+ * Class ExistenceTest
  *
  * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
-class Existence extends \PHPUnit_Framework_TestCase
+class ExistenceTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Existence
@@ -33,10 +33,33 @@ class Existence extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * @covers Snide\Monitoring\Test\File\Existence::__construct
+     */
+    public function test__construct()
+    {
+        $this->assertEquals('EXISTENCE TEST', $this->object->getIdentifier());
+        $this->assertEquals(__FILE__, $this->object->getPath());
+    }
+
+    /**
      * @covers Snide\Monitoring\Test\File\Existence::execute
      */
     public function testExecute()
     {
+        $this->assertTrue($this->object->isExecutable());
+        try {
+            $this->object->execute();
+        }catch(\Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->object->setPath('/'.time());
+        try {
+            $this->object->execute();
+            $this->fail('No exception thrown');
+        }catch(\Exception $e) {
+
+        }
     }
 
     /**
@@ -45,5 +68,8 @@ class Existence extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetPath()
     {
+        $file = '/tmp';
+        $this->object->setPath($file);
+        $this->assertEquals($file, $this->object->getPath());
     }
 }

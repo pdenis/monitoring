@@ -2,6 +2,8 @@
 
 namespace Snide\Monitoring\Executor;
 
+use Snide\Monitoring\Test\Environment;
+
 /**
  * Class TestExecutorTest
  *
@@ -36,7 +38,14 @@ class TestExecutorTest  extends \PHPUnit_Framework_TestCase
      */
     public function testExecute()
     {
+        $test = new Environment('identifier', 'ENV_NOT_FOUND_KEY');
+        $this->object->execute($test);
 
+        $this->assertInstanceOf('\Exception', $test->getException());
+        $_ENV['ENV_NOT_FOUND_KEY'] = '1';
+        $test = new Environment('identifier', 'ENV_NOT_FOUND_KEY');
+        $this->object->execute($test);
+        $this->assertNull($test->getException());
     }
 
 }

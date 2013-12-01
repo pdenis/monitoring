@@ -152,6 +152,7 @@ class Application
      */
     public function setTests(array $tests = array())
     {
+        $this->tests = array();
         foreach ($tests as $test) {
             $this->addTest($test);
         }

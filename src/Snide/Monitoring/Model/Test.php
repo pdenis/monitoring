@@ -32,7 +32,7 @@ abstract class Test
      *
      * @var boolean
      */
-    protected $critic;
+    protected $critic = false;
     /**
      * This test can be executed?
      *

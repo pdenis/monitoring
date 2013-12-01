@@ -51,6 +51,6 @@ class Generic extends Test
      */
     public function execute()
     {
-        throw \Exception('Generic test cannot be executed');
+        throw new \Exception('Generic test cannot be executed');
     }
 }

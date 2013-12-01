@@ -18,7 +18,6 @@ class Permission extends Test
      * @var string
      */
     protected $path;
-
     /**
      * List of permissions to test
      *
