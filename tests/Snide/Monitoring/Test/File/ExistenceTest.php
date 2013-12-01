@@ -35,7 +35,7 @@ class ExistenceTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Snide\Monitoring\Test\File\Existence::__construct
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals('EXISTENCE TEST', $this->object->getIdentifier());
         $this->assertEquals(__FILE__, $this->object->getPath());
@@ -49,7 +49,7 @@ class ExistenceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->isExecutable());
         try {
             $this->object->execute();
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             $this->fail($e->getMessage());
         }
 
@@ -57,7 +57,7 @@ class ExistenceTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
             $this->fail('No exception thrown');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
 
         }
     }

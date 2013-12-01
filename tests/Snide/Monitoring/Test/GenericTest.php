@@ -45,7 +45,7 @@ class GenericTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Snide\Monitoring\Test\Generic::__construct
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals($this->data['identifier'], $this->object->getIdentifier());
         $this->assertEquals($this->data['critic'], $this->object->isCritic());
@@ -62,7 +62,7 @@ class GenericTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
             $this->fail('No exception thrown');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
 
         }
     }

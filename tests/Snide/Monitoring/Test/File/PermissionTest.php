@@ -35,7 +35,7 @@ class PermissionTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Snide\Monitoring\Test\File\Permission::__construct
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals('Permission test', $this->object->getIdentifier());
         $this->assertEquals(array(substr(sprintf('%o', fileperms(__FILE__)), -3)), $this->object->getPermissions());
@@ -50,7 +50,7 @@ class PermissionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->isExecutable());
         try {
             $this->object->execute();
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             $this->fail($e->getMessage());
         }
 
@@ -58,7 +58,7 @@ class PermissionTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
             $this->fail('No exception thrown');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
 
         }
 
@@ -67,7 +67,7 @@ class PermissionTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
             $this->fail('No exception thrown for unexisting file');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
 
         }
     }

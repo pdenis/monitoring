@@ -28,7 +28,7 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->class = 'Snide\\Monitoring\Model\\Application';
-        $this->repository = new ApplicationRepository($this->class,'/tmp/filename.yml');
+        $this->repository = new ApplicationRepository($this->class, '/tmp/filename.yml');
         $this->testLoader = new TestLoader();
         $this->object = new ApplicationManager($this->repository, $this->class, $this->testLoader);
     }
@@ -48,7 +48,7 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      * @covers Snide\Monitoring\Manager\ApplicationManager::getTestLoader
      * @covers Snide\Monitoring\Manager\ApplicationManager::getRepository
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->object = new ApplicationManager($this->repository, $this->class, $this->testLoader);
         $this->assertEquals($this->repository, $this->object->getRepository());

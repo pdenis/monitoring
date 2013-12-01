@@ -9,7 +9,7 @@ use Snide\Monitoring\Test\Environment;
  *
  * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
-class TestExecutorTest  extends \PHPUnit_Framework_TestCase
+class TestExecutorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TestExecutor
@@ -47,5 +47,4 @@ class TestExecutorTest  extends \PHPUnit_Framework_TestCase
         $this->object->execute($test);
         $this->assertNull($test->getException());
     }
-
 }

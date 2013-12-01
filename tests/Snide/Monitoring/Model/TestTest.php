@@ -36,7 +36,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Snide\Monitoring\Model\Test::__construct
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals('AN IDENTIFIER', $this->object->getIdentifier());
         $this->assertTrue($this->object->isExecutable());

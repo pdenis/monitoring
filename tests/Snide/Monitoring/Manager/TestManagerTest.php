@@ -3,6 +3,7 @@
 namespace Snide\Monitoring\Manager;
 
 use Snide\Monitoring\Executor\TestExecutor;
+use Snide\Monitoring\Executor\TestExecutorInterface;
 use Snide\Monitoring\Test\Environment;
 
 /**
@@ -17,6 +18,9 @@ class TestManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
+    /**
+     * @var TestExecutorInterface
+     */
     protected $executor;
 
     /**
@@ -33,7 +37,7 @@ class TestManagerTest extends \PHPUnit_Framework_TestCase
      * @covers Snide\Monitoring\Manager\TestManager::__construct
      * @covers Snide\Monitoring\Manager\TestManager::GetExecutor
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals($this->executor, $this->object->getExecutor());
     }
@@ -246,22 +250,25 @@ class TestManagerTest extends \PHPUnit_Framework_TestCase
         $tests = array($test, $anotherTest);
         $this->object->setTests($tests);
         $data = json_encode(
-            array('tests' => array(
-                array(
-                    'identifier' => 'TEST',
-                    'critic'     => true,
-                    'category'   => 'onecategory',
-                    'exception'  => array(
-                        'message' => 'An exception',
-                        'code'    => 0
+            array(
+                'tests' => array(
+                    array(
+                        'identifier' => 'TEST',
+                        'critic'     => true,
+                        'category'   => 'onecategory',
+                        'exception'  => array(
+                            'message' => 'An exception',
+                            'code'    => 0
+                        )
+                    ),
+                    array(
+                        'identifier'  => 'TEST2',
+                        'critic'      => true,
+                        'category'    => 'unknown',
                     )
-                ),
-                array(
-                    'identifier'  => 'TEST2',
-                    'critic'      => true,
-                    'category'    => 'unknown',
                 )
-            )));
+            )
+        );
         $this->assertEquals($data, $this->object->getTestsAsJson());
     }
 

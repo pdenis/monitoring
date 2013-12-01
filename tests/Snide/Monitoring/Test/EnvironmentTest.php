@@ -34,7 +34,7 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Snide\Monitoring\Test\Environment::__construct
      */
-    public function test__construct()
+    public function testConstruct()
     {
         $this->assertEquals('Environment test', $this->object->getIdentifier());
         $this->assertEquals('TYPE_ENV', $this->object->getKey());
@@ -47,7 +47,7 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->object->isExecutable());
         $env = "dev";
-        if(isset($_ENV["TYPE_ENV"])) {
+        if (isset($_ENV["TYPE_ENV"])) {
             $env = $_ENV["TYPE_ENV"];
             unset($_ENV["TYPE_ENV"]);
         }
@@ -55,7 +55,7 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
             $this->fail('No exception thrown');
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
 
         }
 
@@ -63,7 +63,7 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         try {
             $this->object->execute();
 
-        }catch(\Exception $e) {
+        } catch(\Exception $e) {
             $this->fail($e->getMessage());
         }
 
@@ -78,6 +78,5 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setKey('NEW');
         $this->assertEquals('NEW', $this->object->getKey());
-    }
-
+    }   
 }
