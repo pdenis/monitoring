@@ -9,16 +9,7 @@ services: redis-server
 
 before_script:
   - composer install --prefer-source --no-interaction
-  - mkdir -p ~/.pdenis/php/extensions && cd ~/.pdenis/php/extensions \
-       && git clone --depth=50 https://github.com/nicolasff/phpredis \
-       && cd phpredis \
-       && phpize \
-       && echo "Configuring phpredis..." \
-       && ./configure > /dev/null \
-       && echo "Building phpredis..." \
-       && make -j4 > /dev/null \
-       && echo "Installing phpredis..." \
-       && sudo make install > /dev/null
+  - mkdir -p ~/.pdenis/php/extensions && cd ~/.pdenis/php/extensions && git clone https://github.com/nicolasff/phpredis && cd phpredis && phpize \ && echo "Configuring phpredis..." \ && ./configure > /dev/null \ && echo "Building phpredis..." \ && make -j4 > /dev/null \ && echo "Installing phpredis..." \ && sudo make install > /dev/null
   - echo 'extension=redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
