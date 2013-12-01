@@ -1,6 +1,11 @@
 monitoring library helper
 ==========================
 
+A simple library to provide monitoring test class based && applications tests chaining
+
+[![Build Status](https://travis-ci.org/pdenis/monitoring.png?branch=master)](https://travis-ci.org/pdenis/monitoring)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pdenis/monitoring/badges/quality-score.png?s=32b09705adb0d6cd681eb4daa1d8ddac296cf5ec)](https://scrutinizer-ci.com/g/pdenis/monitoring/)
+
 ## features
 * Test class based
 * Application management & chaining
