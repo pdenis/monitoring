@@ -62,5 +62,4 @@ class Existence extends Test
     {
         $this->path = $path;
     }
-
 }

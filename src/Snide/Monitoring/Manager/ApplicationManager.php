@@ -139,5 +139,4 @@ class ApplicationManager implements ApplicationManagerInterface
     {
         return $this->repository;
     }
-
 }

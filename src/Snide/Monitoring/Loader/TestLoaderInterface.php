@@ -17,5 +17,4 @@ interface TestLoaderInterface
      * @param Application $application
      */
     public function loadByApplication(Application $application);
-
 }

@@ -64,5 +64,4 @@ class Environment extends Test
     {
         $this->key = $key;
     }
-
 }

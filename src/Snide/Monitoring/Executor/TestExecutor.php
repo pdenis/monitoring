@@ -28,5 +28,4 @@ class TestExecutor implements TestExecutorInterface
             $test->setException($e);
         }
     }
-
 }

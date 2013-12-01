@@ -164,5 +164,4 @@ class ApplicationRepository implements ApplicationRepositoryInterface
 
         return new $class;
     }
-
 }

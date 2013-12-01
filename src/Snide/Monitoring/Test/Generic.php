@@ -52,5 +52,4 @@ class Generic extends Test
     {
         throw new \Exception('Generic test cannot be executed');
     }
-
 }

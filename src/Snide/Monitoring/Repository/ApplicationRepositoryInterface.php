@@ -50,5 +50,4 @@ interface ApplicationRepositoryInterface
      * @return mixex
      */
     public function update(Application $application);
-
 }

@@ -177,5 +177,4 @@ class Application
 
         return true;
     }
-
 }

@@ -73,5 +73,4 @@ class Redis extends Test
             throw new \Exception('Read only system (check memory_used)', 1);
         }
     }
-
 }
