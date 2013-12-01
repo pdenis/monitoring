@@ -20,15 +20,16 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
     protected $class;
     protected $repository;
     protected $testLoader;
-
+    protected $filename;
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
+        $this->filename = '/tmp/filename.yml';
         $this->class = 'Snide\\Monitoring\Model\\Application';
-        $this->repository = new ApplicationRepository($this->class, '/tmp/filename.yml');
+        $this->repository = new ApplicationRepository($this->class, $this->filename);
         $this->testLoader = new TestLoader();
         $this->object = new ApplicationManager($this->repository, $this->class, $this->testLoader);
     }
@@ -39,6 +40,9 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        if(file_exists($this->filename)) {
+            unlink($this->filename);
+        }
     }
 
 
@@ -62,6 +66,16 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app 3');
+        $application->setUrl('http://localhost/3');
+
+        $applications = $this->object->findAll();
+        $application->setId(sizeof($applications) + 1);
+        $applications[] = $application;
+        $this->object->create($application);
+
+        $this->assertEquals(sizeof($applications), sizeof($this->object->findAll()));
     }
 
     /**
@@ -69,6 +83,22 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+
+        $applications = $this->object->findAll();
+
+        $this->object->delete($applications[0]);
+        unset($applications[0]);
+        $this->assertEquals(sizeof($applications), sizeof($this->object->findAll()));
     }
 
     /**
@@ -76,6 +106,21 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFind()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+
+        $this->assertNull($this->object->find(-1));
+        $applications = $this->object->findAll();
+
+        $this->assertNotNull($this->object->find($applications[1]->getId()));
     }
 
     /**
@@ -83,7 +128,18 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFindAll()
     {
-
+        $this->assertEquals(array(), $this->object->findAll());
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+        $this->assertEquals(sizeof(array($application, $applicationTwo)), sizeof($this->object->findAll()));
     }
 
     /**
@@ -91,5 +147,15 @@ class ApplicationManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application = $this->object->find(1);
+        $this->assertEquals('My app', $application->getName());
+        $application->setName('My new app');
+        $this->object->update($application);
+        $application = $this->object->find(1);
+        $this->assertEquals('My new app', $application->getName());
     }
 }

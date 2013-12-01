@@ -2,6 +2,8 @@
 
 namespace Snide\Monitoring\Repository\Yaml;
 
+use Snide\Monitoring\Model\Application;
+
 /**
  * Class ApplicationRepositoryTest
  *
@@ -13,6 +15,19 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      * @var ApplicationRepository
      */
     protected $object;
+    /**
+     * Filename
+     *
+     * @var string
+     */
+    protected $filename;
+
+    /**
+     * Class
+     *
+     * @var string
+     */
+    protected $class;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -20,7 +35,13 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new ApplicationRepository('Snide\\Monitoring\\Model\\Application', '/tmp/filename.yml');
+        $this->filename = '/tmp/filename.yml';
+        $this->class = 'Snide\\Monitoring\\Model\\Application';
+
+        if(file_exists($this->filename)) {
+            unlink($this->filename);
+        }
+        $this->object = new ApplicationRepository($this->class, $this->filename);
     }
 
     /**
@@ -29,14 +50,40 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        if(file_exists($this->filename)) {
+            unlink($this->filename);
+        }
     }
 
+
+    /**
+     * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::__construct
+     * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::createNew
+     */
+    public function testConstruct()
+    {
+        $this->assertTrue(file_exists($this->filename));
+        $this->assertInstanceOf($this->class, $this->object->createNew());
+
+    }
 
     /**
      * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::findAll
      */
     public function testFindAll()
     {
+        $this->assertEquals(array(), $this->object->findAll());
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+        $this->assertEquals(array($application, $applicationTwo), $this->object->findAll());
     }
 
     /**
@@ -44,6 +91,21 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testFind()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+
+        $this->assertNull($this->object->find(-1));
+        $applications = $this->object->findAll();
+
+        $this->assertEquals($applications[1], $this->object->find($applications[1]->getId()));
     }
 
     /**
@@ -51,6 +113,17 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app 3');
+        $application->setUrl('http://localhost/3');
+
+        $applications = $this->object->findAll();
+        $application->setId(sizeof($applications) + 1);
+        $applications[] = $application;
+        $this->object->create($application);
+
+        $this->assertEquals($applications, $this->object->findAll());
+
     }
 
     /**
@@ -58,6 +131,22 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application->setId(1);
+        $applicationTwo = $this->object->createNew();
+        $applicationTwo->setName('My app 2');
+        $applicationTwo->setUrl('http://localhost/2');
+        $this->object->create($applicationTwo);
+        $applicationTwo->setId(2);
+
+        $applications = $this->object->findAll();
+
+        $this->object->delete($applications[0]);
+        unset($applications[0]);
+        $this->assertEquals(array_values($applications), $this->object->findAll());
     }
 
     /**
@@ -65,12 +154,18 @@ class ApplicationRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
-    }
+        $application = $this->object->createNew();
+        $application->setName('My app');
+        $application->setUrl('http://localhost');
+        $this->object->create($application);
+        $application = $this->object->find(1);
+        $this->assertEquals('My app', $application->getName());
+        $application->setName('My new app');
+        $this->object->update($application);
+        $application = $this->object->find(1);
+        $this->assertEquals('My new app', $application->getName());
 
-    /**
-     * @covers Snide\Monitoring\Repository\Yaml\ApplicationRepository::createNew
-     */
-    public function testCreateNew()
-    {
+
+
     }
 }

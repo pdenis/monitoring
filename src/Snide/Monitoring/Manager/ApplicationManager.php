@@ -75,6 +75,9 @@ class ApplicationManager implements ApplicationManagerInterface
     public function find($id)
     {
         $application = $this->repository->find($id);
+        if(null == $application) {
+            return null;
+        }
         // Load tests
         $this->testLoader->loadByApplication($application);
 
