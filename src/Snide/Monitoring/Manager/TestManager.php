@@ -10,7 +10,7 @@ use Snide\Monitoring\Model\Test;
  *
  * @author Pascal DENIS <pascal.denis.75@gmail.com>
  */
-class TestManager
+class TestManager implements TestManagerInterface
 {
     /**
      * Test executor
