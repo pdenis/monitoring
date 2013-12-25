@@ -8,6 +8,7 @@ tools:
             paths: {  }
             excluded_paths:
                 - 'tests/*'
+                - 'vendor/*'
         config:
             rulesets:
                 - codesize
@@ -23,6 +24,7 @@ tools:
         filter:
             excluded_paths:
                 - 'tests/*'
+                - 'vendor/*'
         extensions:
             - php
     php_code_sniffer:
@@ -35,6 +37,7 @@ tools:
         filter:
             excluded_paths:
                 - 'tests/*'
+                - 'vendor/*'
 
     php_pdepend:
         command: pdepend
@@ -45,3 +48,7 @@ tools:
             - vendor
             - tests
         enabled: true
+    php_code_coverage: true
+
+before_commands:
+    - "composer install --prefer-source"
