@@ -20,14 +20,23 @@ class TestLoader implements TestLoaderInterface
      */
     public function loadByApplication(Application $application)
     {
-        $data = array();
         try {
             $client = new Client($application->getUrl());
             $data = json_decode($client->get()->send()->getBody(true), true);
+            $this->loadTests($application, $data);
         } catch (\Exception $e) {
             $application->setException($e);
         }
+    }
 
+    /**
+     * Load tests for an app
+     *
+     * @param Application $application
+     * @param array $data
+     */
+    protected function loadTests(Application $application, $data = array())
+    {
         if (isset($data['tests']) && is_array($data['tests'])) {
             foreach ($data['tests'] as $test) {
                 $application->addTest(new Generic($test));

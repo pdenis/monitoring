@@ -24,12 +24,7 @@ class Generic extends Test
             $this->category = $data['category'];
         }
 
-        if (isset($data['exception']['code']) && isset($data['exception']['message'])) {
-            $this->exception = new \Exception(
-                $data['exception']['message'],
-                $data['exception']['code']
-            );
-        }
+        $this->loadException($data);
 
         if (isset($data['identifier'])) {
             $this->identifier = $data['identifier'];
@@ -40,6 +35,21 @@ class Generic extends Test
         }
 
         $this->executable = false;
+    }
+
+    /**
+     * Load exception data
+     *
+     * @param array $data
+     */
+    protected function loadException($data = array())
+    {
+        if (isset($data['exception']['code']) && isset($data['exception']['message'])) {
+            $this->exception = new \Exception(
+                $data['exception']['message'],
+                $data['exception']['code']
+            );
+        }
     }
 
     /**

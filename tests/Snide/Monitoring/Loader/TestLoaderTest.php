@@ -34,6 +34,7 @@ class TestLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Snide\Monitoring\Loader\TestLoader::loadByApplication
+     * @covers Snide\Monitoring\Loader\TestLoader::loadTests
      */
     public function testLoadByApplication()
     {

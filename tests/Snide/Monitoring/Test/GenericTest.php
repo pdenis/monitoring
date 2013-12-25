@@ -44,6 +44,7 @@ class GenericTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Snide\Monitoring\Test\Generic::__construct
+     * @covers Snide\Monitoring\Test\Generic::loadException
      */
     public function testConstruct()
     {
