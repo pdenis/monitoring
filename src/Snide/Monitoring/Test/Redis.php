@@ -58,8 +58,23 @@ class Redis extends Test
             $this->port
         );
 
+        // Ping server
         $client->ping();
 
+        // check if server instance is writable
+        if (!$this->isWritable($client)) {
+            throw new \Exception('Read only system (check memory_used)', 1);
+        }
+    }
+
+    /**
+     * Check if Redis instance is writable
+     *
+     * @param $client Redis client
+     * @return bool
+     */
+    protected function isWritable($client)
+    {
         // Write test (for readonly pb)
         $key = 'monitor_key';
         $content = 'VALUE_MONITOR';
@@ -69,8 +84,6 @@ class Redis extends Test
         // Remove key after the test
         $client->delete($key);
 
-        if (!$ret) {
-            throw new \Exception('Read only system (check memory_used)', 1);
-        }
+        return (null != $ret);
     }
 }
